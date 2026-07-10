@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-3xl mx-auto space-y-6 w-full">
+    <div class="border-b border-gray-700 pb-4">
+        <h2 class="text-3xl font-black text-white">🚗 4-Tugma: Smart Auto Analyst AI</h2>
+        <p class="text-sm text-gray-400">Rasm (DL) + Matn (NLP) + Narx (ML) zanjirli multimodal sun'iy intellekt tizimi</p>
+    </div>
+
+    <form action="/predict/model4" method="POST" enctype="multipart/form-data" class="bg-gray-800 p-6 rounded-2xl border border-gray-700 space-y-4 shadow-xl">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Mashina Modeli</label>
+                <select name="model_name" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
+                    <option value="Gentra">Gentra</option>
+                    <option value="Malibu">Malibu</option>
+                    <option value="Tracker">Tracker</option>
+                    <option value="Cobalt">Cobalt</option>
+                    <option value="Nexia 3">Nexia 3</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Ishlab chiqarilgan yili</label>
+                <input type="number" name="year" value="2022" required class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
+            </div>
+        </div>
+        
+        <div>
+            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Probeg (km)</label>
+            <input type="number" name="probeg" value="45000" required class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Mashina haqida erkin tavsif (NLP uchun)</label>
+            <textarea name="description" rows="3" required placeholder="Masalan: Kraskasi toza, matori zor soatday ishlayapti, ishi yo'q..." class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none"></textarea>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Mashina rasmini yuklang (DL Computer Vision)</label>
+            <input type="file" name="file" required class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-500 cursor-pointer">
+        </div>
+
+        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-xl text-sm font-bold transition shadow-lg">AI ANALIZNI BOSHLASH 🚀</button>
+    </form>
+
+    {% if result %}
+    <div class="bg-purple-950/50 border border-purple-500/40 p-5 rounded-2xl shadow-xl">
+        <h4 class="text-sm font-bold text-purple-400 uppercase tracking-wider mb-1">🧠 Sun'iy Intellekt Tahlili Natijasi:</h4>
+        <p class="text-xl font-bold text-white">{{ result }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
