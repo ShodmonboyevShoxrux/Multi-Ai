@@ -3,7 +3,7 @@
 venv/
 ENV/
 env/
-.env/
+.env
 
 # Python kesh fayllari
 __pycache__/
@@ -21,9 +21,4 @@ Thumbs.db
 # Katta ma'lumotlar bazasi fayllari (agar loyihada bo'lsa)
 *.sqlite3
 *.db
-
-models1/
-models3/
-models4/
-*.joblib
 *.keras
