@@ -48,15 +48,17 @@ async def predict_resume(request: Request, text: str = Form(...)):
 # 💳 3-TUGMA: Kredit Scoring (Ustunlar muammosi to'liq tuzatildi)
 @router.post("/model3", response_class=HTMLResponse)
 async def predict_credit(
-    request: Request, age: int = Form(...), income: float = Form(...), 
-    emp_len: float = Form(...), loan_amt: float = Form(...), 
-    int_rate: float = Form(...), percent: float = Form(...), hist_len: int = Form(...)
+    request: Request, age: int = Form(...), income: str = Form(...), 
+    emp_len: str = Form(...), loan_amt: str = Form(...), 
+    int_rate: str = Form(...), percent: str = Form(...), hist_len: int = Form(...)
 ):
-    # 22 ta ustunli bo'sh lug'at yaratamiz
+    income = float(income.replace(",", "."))
+    emp_len = float(emp_len.replace(",", "."))
+    loan_amt = float(loan_amt.replace(",", "."))
+    int_rate = float(int_rate.replace(",", "."))
+    percent = float(percent.replace(",", "."))
+
     input_dict = {col: 0 for col in credit_features}
-    
-    # Formadan kelgan qiymatlarni model kutayotgan kalit so'zlarga moslab joylashtiramiz
-    # Eslatma: Agar Colab'da ustun nomlari boshqacha bo'lsa, shu yerda moslab oling
     input_dict['person_age'] = age
     input_dict['person_income'] = income
     input_dict['person_emp_length'] = emp_len
